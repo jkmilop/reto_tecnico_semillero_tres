@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "finalhandler": "^1.2.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.33.0",
+    "unpipe": "^1.0.0"
+  },
+  "name": "reto_tecnico_semillero_tres",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "d": "nodemon models/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkmilop/reto_tecnico_semillero_tres.git"
+  },
+  "keywords": [],
+  "author": "Juan Camilo Peña",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkmilop/reto_tecnico_semillero_tres/issues"
+  },
+  "homepage": "https://github.com/jkmilop/reto_tecnico_semillero_tres#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
