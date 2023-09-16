@@ -1,28 +1,46 @@
 'use strict';
 
-const { Model, DataTypes } = require('sequelize');
-
-module.exports = (sequelize) => {
-  class Alumno extends Model {
-    static associate(models) {
-      // Define las asociaciones aquí si es necesario
-    }
-  }
-
-  Alumno.init(
-    {
-      nombre: DataTypes.STRING,
-      identificacion: DataTypes.INTEGER,
-      telefono: DataTypes.INTEGER,
-      semestre: DataTypes.INTEGER,
-      idFacultad: DataTypes.INTEGER,
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/database.js'); // Asegúrate de que la importación del objeto sequelize sea correcta
+const Facultad = require('./facultad.js')
+const Alumno = sequelize.define(
+  "Alumno",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-      sequelize,
-      modelName: 'Alumno',
-      timestamps: false, 
-    }
-  );
+    nombre: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    identificacion: DataTypes.STRING,
+    telefono: DataTypes.STRING,
+    semestre: DataTypes.INTEGER,
+    id_facultad: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Facultad',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'Alumno',
+    timestamps: false,
+    freezeTableName: true,
+  }
+);
 
-  return Alumno;
-};
+Alumno.hasOne(Facultad, {
+  foreinkey: "id_facultad",
+  sourceKey: "id",
+});
+Facultad.belongsTo(Alumno, { foreignKey: "id_facultad", targetId: "id" });
+
+module.exports = Alumno;

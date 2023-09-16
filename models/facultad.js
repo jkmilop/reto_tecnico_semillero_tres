@@ -2,8 +2,8 @@
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database.js'); // Asegúrate de que la importación del objeto sequelize sea correcta
-const Profesor = sequelize.define(
-  "Profesor",
+const Facultad = sequelize.define(
+  "Facultad",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -17,19 +17,15 @@ const Profesor = sequelize.define(
         notEmpty: true,
       },
     },
-    identificacion: DataTypes.INTEGER,
-    telefono: DataTypes.INTEGER,
-    idRol: DataTypes.INTEGER,
-    tituloAcademico: DataTypes.STRING,
-    fechaInicio: DataTypes.DATE,
+    descripcion: DataTypes.TEXT,
+    fechaInauguracion: DataTypes.DATE,
   },
   {
     sequelize,
-    modelName: 'Profesor',
+    modelName: 'Facultad',
     timestamps: false,
     freezeTableName: true,
-
   }
 );
 
-module.exports = Profesor;
+module.exports = Facultad;

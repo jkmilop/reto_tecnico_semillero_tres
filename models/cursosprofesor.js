@@ -1,40 +1,49 @@
 'use strict';
-const { Model } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
-  class CursosProfesor extends Model {
-    static associate(models) {
-      models.CursosProfesor.belongsTo(models.Curso, { foreignKey: 'id_curso' });
-      models.CursosProfesor.belongsTo(models.Profesor, { foreignKey: 'id_profesor' });
-    }
-  }
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/database.js'); // Asegúrate de que la importación del objeto sequelize sea correcta
+const Profesor = require('./profesor.js')
+const Curso = require('./curso.js')
 
-  CursosProfesor.init(
-    {
-      descripcion: DataTypes.TEXT,
-      id_curso: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Curso', // Asegúrate de que coincida con el nombre del modelo de Curso
-          key: 'id',
-        },
-        allowNull: false,
-      },
-      id_profesor: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Profesor', // Asegúrate de que coincida con el nombre del modelo de Profesor
-          key: 'id',
-        },
-        allowNull: false,
-      },
+const CursosProfesor = sequelize.define(
+  "CursosProfesor",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-      sequelize,
-      modelName: 'CursosProfesor',
-      timestamps: false, 
-    }
-  );
+    descripcion: DataTypes.TEXT,
+    id_curso: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Curso',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+    id_profesor: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Profesor',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'CursosProfesor',
+    timestamps: false,
+    freezeTableName: true,
 
-  return CursosProfesor;
-};
+  }
+);
+CursosProfesor.hasOne(Profesor, {
+  foreinkey: "id_profesor",
+  sourceKey: "id",
+});
+Profesor.belongsTo(CursosProfesor, { foreignKey: "id_profesor", targetId: "id" });
+Profesor.hasMany(Curso, { foreignKey: "id_curso", targetId: "id" }); // A HasMany B
+Curso.belongsToMany(Profesor, { foreignKey: "id_curso", targetId: "id" });
+module.exports = CursosProfesor;

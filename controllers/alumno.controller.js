@@ -1,24 +1,24 @@
 const Alumno = require('../models/alumno.js');
-// Manejador de errores genérico
+const Facultad = require('../models/facultad.js');
+
 function handleError(res, error) {
   console.error('Error:', error);
   return res.status(500).json({ message: error.message });
 }
 
 async function agregarAlumno(req, res) {
-  const { nombre, identificacion, telefono, semestre, idFacultad } = req.body;
   try {
-    const nuevoAlumno = await Alumno.create({
-      nombre,
-      identificacion,
-      telefono,
-      semestre,
-      idFacultad,
-    });
+    const nuevoAlumno = await Alumno.create(req.body);
+    const facultad = await Facultad.findByPk(req.body.idFacultad);
+    if (facultad) {
+      await nuevoAlumno.setFacultad(facultad);
+    }
+
     res.json(nuevoAlumno);
   } catch (error) {
     handleError(res, error);
   }
+  return res.status(400).json({ message: 'Teléfono inválido' });
 }
 
 async function obtenerAlumnos(req, res) {
@@ -65,7 +65,9 @@ async function eliminarAlumno(req, res) {
 async function obtenerAlumno(req, res) {
   const { id } = req.params;
   try {
-    const alumno = await Alumno.findByPk(id);
+    const alumno = await Alumno.findByPk(id, {
+      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'idFacultad'],
+    });
     if (!alumno) {
       return res.status(404).json({ message: 'Alumno no encontrado' });
     }
@@ -75,6 +77,7 @@ async function obtenerAlumno(req, res) {
     handleError(res, error);
   }
 }
+
 module.exports = {
   agregarAlumno,
   obtenerAlumnos,
