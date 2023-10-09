@@ -16,12 +16,13 @@ const Profesor = sequelize.define(
       validate: {
         notEmpty: true,
       },
+      unique: true,
     },
     identificacion: DataTypes.INTEGER,
     telefono: DataTypes.INTEGER,
-    idRol: DataTypes.INTEGER,
-    tituloAcademico: DataTypes.STRING,
-    fechaInicio: DataTypes.DATE,
+    id_rol: DataTypes.INTEGER,
+    titulo_academico: DataTypes.STRING,
+    fecha_inicio: DataTypes.DATE,
   },
   {
     sequelize,

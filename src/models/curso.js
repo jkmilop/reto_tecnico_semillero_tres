@@ -2,6 +2,7 @@
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database.js'); // Asegúrate de que la importación del objeto sequelize sea correcta
+
 const Curso = sequelize.define(
   "Curso",
   {
@@ -17,7 +18,16 @@ const Curso = sequelize.define(
       validate: {
         notEmpty: true,
       },
+      unique: true,
     },
+    nombre_profesor: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+
     prerrequisito: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,6 +47,11 @@ const Curso = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    cupos_disponibles: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
   },
   {
     sequelize, // Asegúrate de que estés utilizando el objeto sequelize correcto

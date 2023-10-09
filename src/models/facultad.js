@@ -1,24 +1,25 @@
 'use strict';
 
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/database.js'); // Asegúrate de que la importación del objeto sequelize sea correcta
+const sequelize = require('../database/database.js');
+
 const Facultad = sequelize.define(
-  "Facultad",
+  'Facultad',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
     nombre: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: true,
       },
+      unique: true,
     },
     descripcion: DataTypes.TEXT,
-    fechaInauguracion: DataTypes.DATE,
+    fecha_inauguracion: DataTypes.DATE,
   },
   {
     sequelize,

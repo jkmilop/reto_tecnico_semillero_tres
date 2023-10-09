@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const Curso = require('../models/curso.js');
 
 // Manejador de errores genérico
@@ -66,12 +67,59 @@ async function eliminarCurso(req, res) {
 async function obtenerCurso(req, res) {
   const { id } = req.params;
   try {
-    const curso = await Curso.findByPk(id);
+    const curso = await Curso.findByPk(id, {
+      attributes: ['nombre', 'creditos'],
+      include: [
+        {
+          model: Profesor,
+          attributes: ['nombre'],
+        },
+        {
+          model: Alumno,
+          as: 'Alumnos',
+          attributes: ['nombre'],
+        },
+      ],
+    });
+
     if (!curso) {
       return res.status(404).json({ message: 'Curso no encontrado' });
     }
 
-    res.json(curso);
+    // Obtener el número de estudiantes inscritos
+    const numeroEstudiantes = curso.Alumnos.length;
+
+    res.json({
+      nombre: curso.nombre,
+      estudiantesInscritos: numeroEstudiantes,
+      profesor: curso.Profesor.nombre,
+      creditos: curso.creditos,
+      alumnosCursando: curso.Alumnos.map((alumno) => alumno.nombre),
+    });
+  } catch (error) {
+    handleError(res, error);
+  }
+}
+
+async function obtenerCursoPorNombre(req, res) {
+  const { nombre } = req.query;
+  try {
+    const cursos = await Curso.findAll({
+      where: { nombre: { [Op.iLike]: `%${nombre}%` } },
+    });
+    res.json(cursos);
+  } catch (error) {
+    handleError(res, error);
+  }
+}
+
+async function obtenerCursosPorEstadoCupos(req, res) {
+  const { tieneCupos } = req.query;
+  try {
+    const cursos = await Curso.findAll({
+      where: { cupos: { [Op.gt]: 0 } },
+    });
+    res.json(cursos);
   } catch (error) {
     handleError(res, error);
   }
@@ -83,4 +131,6 @@ module.exports = {
   actualizarCurso,
   eliminarCurso,
   obtenerCurso,
+  obtenerCursoPorNombre,
+  obtenerCursosPorEstadoCupos,
 };

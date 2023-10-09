@@ -1,6 +1,7 @@
 const Alumno = require('../models/alumno.js');
 const Facultad = require('../models/facultad.js');
-
+const CursosAlumno = require('../models/cursosalumno.js');
+// Manejador de errores genérico
 function handleError(res, error) {
   console.error('Error:', error);
   return res.status(500).json({ message: error.message });
@@ -9,7 +10,7 @@ function handleError(res, error) {
 async function agregarAlumno(req, res) {
   try {
     const nuevoAlumno = await Alumno.create(req.body);
-    const facultad = await Facultad.findByPk(req.body.idFacultad);
+    const facultad = await Facultad.findByPk(req.body.nombre_facultad);
     if (facultad) {
       await nuevoAlumno.setFacultad(facultad);
     }
@@ -18,12 +19,13 @@ async function agregarAlumno(req, res) {
   } catch (error) {
     handleError(res, error);
   }
-  return res.status(400).json({ message: 'Teléfono inválido' });
 }
 
 async function obtenerAlumnos(req, res) {
   try {
-    const alumnos = await Alumno.findAll();
+    const alumnos = await Alumno.findAll({
+      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'nombre_facultad'],
+    });
     res.json(alumnos);
   } catch (error) {
     handleError(res, error);
@@ -66,7 +68,7 @@ async function obtenerAlumno(req, res) {
   const { id } = req.params;
   try {
     const alumno = await Alumno.findByPk(id, {
-      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'idFacultad'],
+      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'nombre_facultad'],
     });
     if (!alumno) {
       return res.status(404).json({ message: 'Alumno no encontrado' });
@@ -78,10 +80,42 @@ async function obtenerAlumno(req, res) {
   }
 }
 
+async function listarAlumnosConInfo(req, res) {
+  try {
+    const alumnos = await Alumno.findAll({
+      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'nombre_facultad'],
+      include: [
+        { model: Facultad, as: 'Facultad', attributes: ['nombre'] },
+        { model: CursosAlumno, as: 'CursosAlumno', attributes: ['creditos_inscritos'] }
+      ],
+    });
+    res.json(alumnos);
+  } catch (error) {
+    handleError(res, error);
+  }
+}
+
+async function buscarAlumnosPorFacultad(req, res) {
+  const { nombre_facultad } = req.params;
+  try {
+    // Puedes personalizar esta consulta según tus necesidades
+    const alumnos = await Alumno.findAll({
+      where: { nombre_facultad },
+      attributes: ['nombre', 'identificacion', 'telefono', 'semestre', 'nombre_facultad'],
+      include: [{ model: Facultad, as: 'Facultad', attributes: ['nombre'] }],
+    });
+    res.json(alumnos);
+  } catch (error) {
+    handleError(res, error);
+  }
+}
+
 module.exports = {
   agregarAlumno,
   obtenerAlumnos,
   actualizarAlumno,
   eliminarAlumno,
   obtenerAlumno,
+  listarAlumnosConInfo,
+  buscarAlumnosPorFacultad,
 };
