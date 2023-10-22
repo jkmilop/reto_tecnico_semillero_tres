@@ -1,4 +1,4 @@
 config/config.json
 node_modules
-
+src/database/database.js
 package-lock.json
