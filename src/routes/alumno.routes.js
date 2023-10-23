@@ -17,6 +17,6 @@ router.get("/", obtenerAlumnos);
 router.put("/:id", actualizarAlumno);
 router.delete("/:id", eliminarAlumno);
 router.get("/:id", obtenerAlumno);
-router.get("/:id", listarAlumnosConInfo);
+router.get("/info/:id", listarAlumnosConInfo);
 router.get("/:nombre_facultad", buscarAlumnosPorFacultad);
 module.exports = router;
