@@ -1,7 +1,7 @@
-# Reto tecnico #3 semillero 
+# Reto tecnico tres semillero 
 Este proyecto es un sistema de gestión de cursos académicos. A continuación se presenta el contenido del README para este proyecto:
 
-##Funcionalidades
+## Funcionalidades
 El sistema de gestión de cursos académicos cuenta con las siguientes funcionalidades:
 
 1. Listar  Cursos Ofrecidos:
@@ -44,15 +44,19 @@ El sistema de gestión de cursos académicos cuenta con las siguientes funcional
 ## Uso del Proyecto
 Para utilizar este proyecto, se deben seguir los siguientes pasos:
 
-1. Clonar el [repositorio] del proyecto desde (https://github.com/jkmilop/reto_tecnico_semillero_tres.git)
- del repositorio.
+1. Clonar el [repositorio](https://github.com/jkmilop/reto_tecnico_semillero_tres.git).
+
 2. Instalar las dependencias del proyecto ejecutando los siguientes comandos:
-```npm install cors express finalhandler pg pg-hstore sequelize```
-```npm install --save-dev nodemon```
+```bash
+npm install cors express finalhandler pg pg-hstore sequelize
+npm install --save-dev nodemon
+```
 3. Configurar la conexión a la base de datos en el archivo database.js.
 4. Ejecutar el proyecto usando el siguiente comando:
-```npm run d```
-Esto iniciará el servidor y el sistema de gestión de cursos académicos estará disponible en http://localhost:4000.
+```bash 
+npm run d
+```
+Esto iniciará el servidor y el sistema de gestión de cursos académicos estará [disponible](http://localhost:4000).
 
 ## Contribuciones
 Las contribuciones al proyecto son bienvenidas. Si desea contribuir, siga estos pasos:
