@@ -2,7 +2,6 @@ const CursosAlumno = require('../models/cursosalumno.js');
 const Curso = require('../models/curso.js');
 const Alumno = require('../models/alumno.js');
 
-// Manejador de errores genérico
 function handleError(res, error) {
   console.error('Error:', error);
   return res.status(500).json({ message: error.message });
@@ -93,6 +92,7 @@ async function eliminarCursosAlumno(req, res) {
 module.exports = {
   agregarCursosAlumno,
   obtenerCursosAlumno,
+  obtenerCursosAlumnoPorId,
   actualizarCursosAlumno,
   eliminarCursosAlumno,
 };

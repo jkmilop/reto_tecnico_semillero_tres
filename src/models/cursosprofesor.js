@@ -38,11 +38,4 @@ const CursosProfesor = sequelize.define(
   }
 );
 
-//CursosProfesor.hasOne(Profesor, { sourceKey: 'id' , foreignKey: 'id_profesor' }); // A Curso has many CursosProfesor
-//CursosProfesor.hasMany(Curso, { sourceKey: 'id',foreignKey: 'id_curso' }); // A Profesor has many CursosProfesor
-//Curso.belongsTo(CursosProfesor); // A Curso belongs to many Alumnos through CursosAlumno
-//Profesor.belongsToMany(Curso, { through: CursosProfesor ,  foreignKey: 'id_curso',}); // An Alumno belongs to many Cursos through CursosAlumno
-//CursosProfesor.belongsTo(Profesor, { targetKey: 'id',foreignKey: 'id_curso' });
-//Curso.belongsToMany(Profesor, {through: CursosProfesor,foreignKey: 'id_curso',as: 'Profesores',}); // Alias for the association
-
 module.exports = CursosProfesor;

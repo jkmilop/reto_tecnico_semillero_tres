@@ -5,18 +5,14 @@ const {
   actualizarAlumno,
   eliminarAlumno,
   obtenerAlumno,
-  listarAlumnosConInfo,
-  buscarAlumnosPorFacultad,
-
 } = require("../controllers/alumno.controller.js");
 
 const router = Router();
 
-router.post("/", agregarAlumno);
 router.get("/", obtenerAlumnos);
+router.post("/", agregarAlumno);
 router.put("/:id", actualizarAlumno);
-router.delete("/:id", eliminarAlumno);
 router.get("/:id", obtenerAlumno);
-router.get("/:id", listarAlumnosConInfo);
-router.get("/:nombre_facultad", buscarAlumnosPorFacultad);
+router.delete("/:id", eliminarAlumno);
+
 module.exports = router;

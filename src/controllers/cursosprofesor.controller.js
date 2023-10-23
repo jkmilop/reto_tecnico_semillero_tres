@@ -2,7 +2,6 @@ const CursosProfesor = require('../models/cursosprofesor.js');
 const Curso = require('../models/curso.js');
 const Profesor = require('../models/profesor.js');
 
-// Manejador de errores genérico
 function handleError(res, error) {
   console.error('Error:', error);
   return res.status(500).json({ message: error.message });
