@@ -5,7 +5,7 @@ const {
   actualizarProfesor,
   eliminarProfesor,
   obtenerProfesor,
-} = require("../controllers/Profesor.controller.js");
+} = require("../controllers/profesor.controller.js");
 
 const router = Router();
 

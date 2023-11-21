@@ -30,10 +30,7 @@ const Curso = sequelize.define(
 
     prerrequisito: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     activo: {
       type: DataTypes.BOOLEAN,

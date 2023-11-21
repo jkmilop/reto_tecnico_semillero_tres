@@ -11,11 +11,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/reto-tres/alumnos', alumnoRoutes);
-app.use('/reto-tres/cursos', cursoRoutes);
-app.use('/reto-tres/cursos-alumno', cursosAlumnoRoutes);
-app.use('/reto-tres/cursos-profesor', cursosProfesorRoutes);
-app.use('/reto-tres/facultades', facultadRoutes);
-app.use('/reto-tres/profesores', profesorRoutes);
+app.use('/alumnos', alumnoRoutes);
+app.use('/cursos', cursoRoutes);
+app.use('/cursos-alumno', cursosAlumnoRoutes);
+app.use('/cursos-profesor', cursosProfesorRoutes);
+app.use('/facultades', facultadRoutes);
+app.use('/profesores', profesorRoutes);
 
 module.exports = app;

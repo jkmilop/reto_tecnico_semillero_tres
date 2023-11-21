@@ -20,7 +20,6 @@ const Profesor = sequelize.define(
     },
     identificacion: DataTypes.INTEGER,
     telefono: DataTypes.INTEGER,
-    id_rol: DataTypes.INTEGER,
     titulo_academico: DataTypes.STRING,
     fecha_inicio: DataTypes.DATE,
   },

@@ -1,0 +1,62 @@
+/* Estilos globales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f7fb; /* Fondo azul claro */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Componente Cliente */
+.table-container {
+  margin-bottom: 20px;
+}
+
+/* Componente SignUp */
+.form-control {
+  width: 100%;
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #1c3d5a; /* Borde azul oscuro */
+  color: #000000; /* Texto negro */
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Incluir padding y borde en el ancho y alto total del elemento */
+}
+
+.invalid-feedback {
+  color: #ff0000; /* Texto rojo para mensajes de error */
+  font-size: 0.9em; /* Reducir ligeramente el tamaño de fuente para una mejor jerarquía visual */
+  margin-top: 5px; /* Agregar espacio encima del mensaje de error */
+}
+
+/* Colores de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Agregar espacio encima de la tabla */
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Aumentar el relleno para un mejor espaciado */
+}
+
+.table th {
+  background-color: #444444; /* Fondo gris oscuro para la fila del encabezado */
+  color: #ffffff; /* Texto blanco para la fila del encabezado */
+  text-align: left;
+}
+
+.table td {
+  background-color: #f5f5f5; /* Fondo gris claro para las filas */
+}
+
+.table tr:hover {
+  background-color: #cbe2ff; /* Fondo azul claro para resaltar la información al pasar el ratón */
+  cursor: pointer; /* Cambiar el cursor a puntero al pasar el ratón para una mejor experiencia de usuario */
+}

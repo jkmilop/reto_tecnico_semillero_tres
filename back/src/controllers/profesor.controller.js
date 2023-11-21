@@ -6,13 +6,12 @@ function handleError(res, error) {
 }
 
 async function agregarProfesor(req, res) {
-  const { nombre, identificacion, telefono, idRol, tituloAcademico, fechaInicio } = req.body;
+  const { nombre, identificacion, telefono, tituloAcademico, fechaInicio } = req.body;
   try {
     const nuevoProfesor = await Profesor.create({
       nombre,
       identificacion,
       telefono,
-      idRol,
       tituloAcademico,
       fechaInicio,
     });

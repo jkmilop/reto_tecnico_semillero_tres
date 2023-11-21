@@ -3,8 +3,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database.js');
 
-const Facultad = sequelize.define(
-  'Facultad',
+const Carrera = sequelize.define(
+  'Carrera',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,14 +19,13 @@ const Facultad = sequelize.define(
       unique: true,
     },
     descripcion: DataTypes.TEXT,
-    fecha_inauguracion: DataTypes.DATE,
   },
   {
     sequelize,
-    modelName: 'Facultad',
+    modelName: 'Carrera',
     timestamps: false,
     freezeTableName: true,
   }
 );
 
-module.exports = Facultad;
+module.exports = Carrera;

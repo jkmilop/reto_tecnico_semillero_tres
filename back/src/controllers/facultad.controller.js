@@ -6,15 +6,10 @@ function handleError(res, error) {
 }
 
 async function agregarFacultad(req, res) {
-  const { nombre, descripcion, fechaInauguracion } = req.body;
+  const { nombre, fechaInauguracion } = req.body;
   try {
-    if (!nombre || !descripcion || !fechaInauguracion) {
-      return res.status(400).json({ message: 'Faltan campos obligatorios' });
-    }
-
     const nuevaFacultad = await Facultad.create({
       nombre,
-      descripcion,
       fechaInauguracion,
     });
 
